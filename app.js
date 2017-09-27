@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//MONGOOSE SETUP
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -20,7 +21,6 @@ db.once('open', () => {
 })
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -37,7 +37,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+
+const companyController = require('./routes/companyController');
+
+app.use('/companies', companyController)
+
+const snowboardController = require('./routes/snowboardController')
+
+app.use('/companies/:id/snowboards', snowboardController)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

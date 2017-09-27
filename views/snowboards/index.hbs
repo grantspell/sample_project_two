@@ -1,0 +1,11 @@
+<h1>{{company.name}}'s Boards</h1>
+<div>
+    {{#each company.snowboards}}
+        <div>
+            <h1>{{this.name}}</h1>
+        </div>
+        <div>
+            <h1>{{this.price}}</h1>
+        </div>
+    {{/each}}
+</div>
